@@ -3,4 +3,6 @@
 CashFlow = [-10000 2000 1500 3000 3800 5000];
 %%ÌùÏÖÂÊ%%
 Rate = 0.08;
-format long g;pvvar(CashFlow,Rate);
+format long g;
+currentdata =  pvvar(CashFlow,Rate);
+disp(currentdata);
