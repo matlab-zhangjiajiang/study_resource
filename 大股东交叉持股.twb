@@ -1,0 +1,664 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 10500.17.1226.1925                               -->
+<workbook original-version='10.5' source-build='10.5.0 (10500.17.1226.1925)' source-platform='win' version='10.5' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='finance_system_stock_holder_across_data (finance_db)' inline='true' name='federated.0aiz4tm045hnx411hf8od1wb7jj3' version='10.5'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='127.0.0.1' name='mysql.1d92bks0li7rp910x3cdh1cscbj7'>
+            <connection class='mysql' dbname='finance_db' odbc-native-protocol='' one-time-sql='' port='3306' server='127.0.0.1' source-charset='' username='root' />
+          </named-connection>
+        </named-connections>
+        <relation connection='mysql.1d92bks0li7rp910x3cdh1cscbj7' name='finance_system_stock_holder_across_data' table='[finance_system_stock_holder_across_data]' type='table' />
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>STOCKCODE</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[STOCKCODE]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>STOCKCODE</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>32</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>area</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[area]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>area</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>32</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>code</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[code]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>code</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>32</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>gpr</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[gpr]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>gpr</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>holders</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[holders]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>holders</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>industry</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[industry]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>industry</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>32</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>name</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[name]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>name</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>32</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>outstanding</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[outstanding]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>outstanding</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>totals</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[totals]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>totals</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>totalAssets</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[totalAssets]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>totalAssets</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>liquidAssets</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[liquidAssets]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>liquidAssets</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>fixedAssets</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[fixedAssets]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>fixedAssets</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>reserved</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[reserved]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>reserved</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>reservedPerShare</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[reservedPerShare]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>reservedPerShare</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>esp</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[esp]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>esp</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bvps</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bvps]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>bvps</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>undp</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[undp]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>undp</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>npr</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[npr]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>npr</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pb</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[pb]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>pb</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pe</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[pe]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>pe</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>perundp</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[perundp]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>perundp</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>profit</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[profit]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>profit</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>rev</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[rev]</local-name>
+            <parent-name>[finance_system_stock_holder_across_data]</parent-name>
+            <remote-alias>rev</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <layout dim-ordering='alphabetic' dim-percentage='0.2625' measure-ordering='alphabetic' measure-percentage='0.7375' show-structure='true' user-set-layout='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;China&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='工作表 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='finance_system_stock_holder_across_data (finance_db)' name='federated.0aiz4tm045hnx411hf8od1wb7jj3' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0aiz4tm045hnx411hf8od1wb7jj3'>
+            <column datatype='real' name='[holders]' role='measure' type='quantitative' />
+            <column datatype='string' name='[name]' role='dimension' type='nominal' />
+            <column-instance column='[name]' derivation='None' name='[none:name:nk]' pivot='key' type='nominal' />
+            <column-instance column='[holders]' derivation='Sum' name='[sum:holders:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.0aiz4tm045hnx411hf8od1wb7jj3].[sum:holders:qk]</rows>
+        <cols>[federated.0aiz4tm045hnx411hf8od1wb7jj3].[none:name:nk]</cols>
+      </table>
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' maximized='true' name='工作表 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.0aiz4tm045hnx411hf8od1wb7jj3].[none:name:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='工作表 1' width='192'>
+      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
+    </thumbnail>
+  </thumbnails>
+</workbook>
