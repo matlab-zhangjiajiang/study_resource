@@ -166,6 +166,7 @@
             <encoding attr='space' class='0' field='[federated.06zlxxk07zcdpx1elj7v00mvqu5j].[sum:pe_ratio:qk]' field-type='quantitative' fold='true' reverse='true' scope='rows' type='space' />
             <format attr='subtitle' class='0' field='[federated.06zlxxk07zcdpx1elj7v00mvqu5j].[sum:pe_ratio:qk]' scope='rows' value='' />
             <format attr='auto-subtitle' class='0' field='[federated.06zlxxk07zcdpx1elj7v00mvqu5j].[sum:pe_ratio:qk]' scope='rows' value='true' />
+            <format attr='title' class='0' field='[federated.06zlxxk07zcdpx1elj7v00mvqu5j].[sum:pe_ratio:qk]' scope='rows' value='市盈率&lt;20比例' />
           </style-rule>
           <style-rule element='refline'>
             <format attr='fill-above' id='refline2' value='#00000000' />
