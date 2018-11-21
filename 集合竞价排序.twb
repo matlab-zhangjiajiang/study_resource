@@ -14,30 +14,15 @@
             <connection class='mysql' dbname='finance_db' odbc-native-protocol='' one-time-sql='' port='3306' server='127.0.0.1' source-charset='' username='root' />
           </named-connection>
         </named-connections>
-        <relation connection='mysql.09i1zpt0um1rli17l5y8t1skdo4l' name='自定义 SQL 查询' type='text'>SELECT  COUNT(CODE),CODE  &#13;&#10;FROM  FINANCE_SYSTEM_STOCK_SET_BID_DATA &#13;&#10;GROUP BY CODE</relation>
+        <relation connection='mysql.09i1zpt0um1rli17l5y8t1skdo4l' name='自定义 SQL 查询' type='text'>SELECT CODE  , COUNT(CODE)&#13;&#10;FROM  FINANCE_SYSTEM_STOCK_SET_BID_DATA &#13;&#10;GROUP BY CODE</relation>
         <metadata-records>
-          <metadata-record class='column'>
-            <remote-name>COUNT(CODE)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[COUNT(CODE)]</local-name>
-            <parent-name>[自定义 SQL 查询]</parent-name>
-            <remote-alias>COUNT(CODE)</remote-alias>
-            <ordinal>1</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>false</contains-null>
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_BIGINT&quot;</attribute>
-              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SBIGINT&quot;</attribute>
-            </attributes>
-          </metadata-record>
           <metadata-record class='column'>
             <remote-name>CODE</remote-name>
             <remote-type>130</remote-type>
             <local-name>[CODE]</local-name>
             <parent-name>[自定义 SQL 查询]</parent-name>
             <remote-alias>CODE</remote-alias>
-            <ordinal>2</ordinal>
+            <ordinal>1</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <width>32</width>
@@ -49,12 +34,27 @@
               <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
             </attributes>
           </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>COUNT(CODE)</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[COUNT(CODE)]</local-name>
+            <parent-name>[自定义 SQL 查询]</parent-name>
+            <remote-alias>COUNT(CODE)</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_BIGINT&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SBIGINT&quot;</attribute>
+            </attributes>
+          </metadata-record>
         </metadata-records>
       </connection>
       <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
         <calculation class='tableau' formula='1' />
       </column>
-      <layout dim-ordering='alphabetic' dim-percentage='0.479167' measure-ordering='alphabetic' measure-percentage='0.520833' show-structure='true' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.39375' measure-ordering='alphabetic' measure-percentage='0.60625' show-structure='true' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;China&quot;' />
       </semantic-values>
