@@ -54,7 +54,7 @@
       <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
         <calculation class='tableau' formula='1' />
       </column>
-      <layout dim-ordering='alphabetic' dim-percentage='0.39375' measure-ordering='alphabetic' measure-percentage='0.60625' show-structure='true' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.479167' measure-ordering='alphabetic' measure-percentage='0.520833' show-structure='true' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;China&quot;' />
       </semantic-values>
