@@ -14,65 +14,18 @@
             <connection class='mysql' dbname='finance_db' odbc-native-protocol='' one-time-sql='' port='3306' server='127.0.0.1' source-charset='' username='root' />
           </named-connection>
         </named-connections>
-        <relation join='inner' type='join'>
-          <clause type='join'>
-            <expression op='='>
-              <expression op='[20180301_DATA].[holdername]' />
-              <expression op='[20180830_DATA].[holdername]' />
-            </expression>
-          </clause>
-          <relation join='inner' type='join'>
-            <clause type='join'>
-              <expression op='='>
-                <expression op='[20180301_DATA].[holdername]' />
-                <expression op='[20180630_DATA].[holdername]' />
-              </expression>
-            </clause>
-            <relation connection='mysql.0px1wcw0mz794v1117saq1iygxgb' name='20180301_DATA' type='text'>SELECT  *  FROM (&#13;&#10;SELECT  COUNT(ts_code) AS counts, DATAS.holder_name AS holdername, &#13;&#10;        DATAS.hold_amount AS holdamount , DATAS.ann_date&#13;&#10;FROM finance_system_stock_circulat_holds_data_20180301 AS DATAS&#13;&#10;WHERE 1=1 GROUP BY holder_name) AS TEMP ORDER BY TEMP.counts DESC</relation>
-            <relation connection='mysql.0px1wcw0mz794v1117saq1iygxgb' name='20180630_DATA' type='text'>SELECT  *  FROM (&#13;&#10;SELECT  COUNT(ts_code) AS counts, DATAS.holder_name AS holdername, DATAS.hold_amount AS holdamount , DATAS.ann_date&#13;&#10;FROM finance_system_stock_circulat_holds_data_20180630 AS DATAS&#13;&#10;WHERE 1=1 GROUP BY holder_name) AS TEMP ORDER BY TEMP.counts DESC</relation>
-          </relation>
-          <relation connection='mysql.0px1wcw0mz794v1117saq1iygxgb' name='20180830_DATA' type='text'>SELECT  *  FROM (&#13;&#10;SELECT  COUNT(ts_code) AS counts, DATAS.holder_name AS holdername, DATAS.hold_amount AS holdamount , DATAS.ann_date&#13;&#10;FROM finance_system_stock_circulat_holds_data_20180830 AS DATAS&#13;&#10;WHERE 1=1 GROUP BY holder_name) AS TEMP ORDER BY TEMP.counts DESC</relation>
-        </relation>
-        <cols>
-          <map key='[ann_date (自定义 SQL 查询1)]' value='[20180630_DATA].[ann_date]' />
-          <map key='[ann_date (自定义 SQL 查询2)]' value='[20180830_DATA].[ann_date]' />
-          <map key='[ann_date]' value='[20180301_DATA].[ann_date]' />
-          <map key='[counts (自定义 SQL 查询1)]' value='[20180630_DATA].[counts]' />
-          <map key='[counts (自定义 SQL 查询2)]' value='[20180830_DATA].[counts]' />
-          <map key='[counts]' value='[20180301_DATA].[counts]' />
-          <map key='[holdamount (自定义 SQL 查询1)]' value='[20180630_DATA].[holdamount]' />
-          <map key='[holdamount (自定义 SQL 查询2)]' value='[20180830_DATA].[holdamount]' />
-          <map key='[holdamount]' value='[20180301_DATA].[holdamount]' />
-          <map key='[holdername (自定义 SQL 查询1)]' value='[20180630_DATA].[holdername]' />
-          <map key='[holdername (自定义 SQL 查询2)]' value='[20180830_DATA].[holdername]' />
-          <map key='[holdername]' value='[20180301_DATA].[holdername]' />
-        </cols>
+        <relation connection='mysql.0px1wcw0mz794v1117saq1iygxgb' name='20180301_DATA' type='text'>SELECT  *  FROM ( SELECT SUBSTR(ts_code, 1, 6) AS STOCKCODE&#13;&#10;FROM finance_system_stock_circulat_holds_data_20180830&#13;&#10;WHERE ts_code NOT IN (SELECT ts_code FROM&#13;&#10;finance_system_stock_circulat_holds_data_20180630 WHERE holder_name = &apos;中国证券金融股份有限公司&apos;)&#13;&#10;AND holder_name = &apos;中国证券金融股份有限公司&apos;) CODES&#13;&#10;LEFT JOIN finance_system_basic_stock_data AS stockdata ON stockdata. CODE = CODES.STOCKCODE&#13;&#10;ORDER BY pe ASC</relation>
         <metadata-records>
           <metadata-record class='column'>
-            <remote-name>counts</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[counts]</local-name>
-            <parent-name>[20180301_DATA]</parent-name>
-            <remote-alias>counts</remote-alias>
-            <ordinal>1</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>false</contains-null>
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_BIGINT&quot;</attribute>
-              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SBIGINT&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>holdername</remote-name>
+            <remote-name>STOCKCODE</remote-name>
             <remote-type>130</remote-type>
-            <local-name>[holdername]</local-name>
+            <local-name>[STOCKCODE]</local-name>
             <parent-name>[20180301_DATA]</parent-name>
-            <remote-alias>holdername</remote-alias>
-            <ordinal>2</ordinal>
+            <remote-alias>STOCKCODE</remote-alias>
+            <ordinal>1</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
-            <width>150</width>
+            <width>6</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LROOT' />
             <attributes>
@@ -82,12 +35,48 @@
             </attributes>
           </metadata-record>
           <metadata-record class='column'>
-            <remote-name>holdamount</remote-name>
-            <remote-type>5</remote-type>
-            <local-name>[holdamount]</local-name>
+            <remote-name>area</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[area]</local-name>
             <parent-name>[20180301_DATA]</parent-name>
-            <remote-alias>holdamount</remote-alias>
+            <remote-alias>area</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>32</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>code</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[code]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>code</remote-alias>
             <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>32</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>gpr</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[gpr]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>gpr</remote-alias>
+            <ordinal>4</ordinal>
             <local-type>real</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
@@ -97,48 +86,30 @@
             </attributes>
           </metadata-record>
           <metadata-record class='column'>
-            <remote-name>ann_date</remote-name>
-            <remote-type>130</remote-type>
-            <local-name>[ann_date]</local-name>
+            <remote-name>holders</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[holders]</local-name>
             <parent-name>[20180301_DATA]</parent-name>
-            <remote-alias>ann_date</remote-alias>
-            <ordinal>4</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <width>21845</width>
-            <contains-null>true</contains-null>
-            <cast-to-local-type>true</cast-to-local-type>
-            <collation flag='0' name='LROOT' />
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
-              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>counts</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[counts (自定义 SQL 查询1)]</local-name>
-            <parent-name>[20180630_DATA]</parent-name>
-            <remote-alias>counts</remote-alias>
-            <ordinal>6</ordinal>
-            <local-type>integer</local-type>
+            <remote-alias>holders</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
             <aggregation>Sum</aggregation>
-            <contains-null>false</contains-null>
+            <contains-null>true</contains-null>
             <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_BIGINT&quot;</attribute>
-              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SBIGINT&quot;</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
             </attributes>
           </metadata-record>
           <metadata-record class='column'>
-            <remote-name>holdername</remote-name>
+            <remote-name>industry</remote-name>
             <remote-type>130</remote-type>
-            <local-name>[holdername (自定义 SQL 查询1)]</local-name>
-            <parent-name>[20180630_DATA]</parent-name>
-            <remote-alias>holdername</remote-alias>
-            <ordinal>7</ordinal>
+            <local-name>[industry]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>industry</remote-alias>
+            <ordinal>6</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
-            <width>150</width>
+            <width>200</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LROOT' />
             <attributes>
@@ -148,11 +119,29 @@
             </attributes>
           </metadata-record>
           <metadata-record class='column'>
-            <remote-name>holdamount</remote-name>
+            <remote-name>name</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[name]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>name</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>100</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>outstanding</remote-name>
             <remote-type>5</remote-type>
-            <local-name>[holdamount (自定义 SQL 查询1)]</local-name>
-            <parent-name>[20180630_DATA]</parent-name>
-            <remote-alias>holdamount</remote-alias>
+            <local-name>[outstanding]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>outstanding</remote-alias>
             <ordinal>8</ordinal>
             <local-type>real</local-type>
             <aggregation>Sum</aggregation>
@@ -163,62 +152,71 @@
             </attributes>
           </metadata-record>
           <metadata-record class='column'>
-            <remote-name>ann_date</remote-name>
-            <remote-type>130</remote-type>
-            <local-name>[ann_date (自定义 SQL 查询1)]</local-name>
-            <parent-name>[20180630_DATA]</parent-name>
-            <remote-alias>ann_date</remote-alias>
-            <ordinal>9</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <width>21845</width>
-            <contains-null>true</contains-null>
-            <cast-to-local-type>true</cast-to-local-type>
-            <collation flag='0' name='LROOT' />
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
-              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>counts</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[counts (自定义 SQL 查询2)]</local-name>
-            <parent-name>[20180830_DATA]</parent-name>
-            <remote-alias>counts</remote-alias>
-            <ordinal>11</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>false</contains-null>
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_BIGINT&quot;</attribute>
-              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SBIGINT&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>holdername</remote-name>
-            <remote-type>130</remote-type>
-            <local-name>[holdername (自定义 SQL 查询2)]</local-name>
-            <parent-name>[20180830_DATA]</parent-name>
-            <remote-alias>holdername</remote-alias>
-            <ordinal>12</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <width>150</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LROOT' />
-            <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
-              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
-              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>holdamount</remote-name>
+            <remote-name>totals</remote-name>
             <remote-type>5</remote-type>
-            <local-name>[holdamount (自定义 SQL 查询2)]</local-name>
-            <parent-name>[20180830_DATA]</parent-name>
-            <remote-alias>holdamount</remote-alias>
+            <local-name>[totals]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>totals</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>totalAssets</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[totalAssets]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>totalAssets</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>liquidAssets</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[liquidAssets]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>liquidAssets</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>fixedAssets</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[fixedAssets]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>fixedAssets</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>reserved</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[reserved]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>reserved</remote-alias>
             <ordinal>13</ordinal>
             <local-type>real</local-type>
             <aggregation>Sum</aggregation>
@@ -229,29 +227,164 @@
             </attributes>
           </metadata-record>
           <metadata-record class='column'>
-            <remote-name>ann_date</remote-name>
-            <remote-type>130</remote-type>
-            <local-name>[ann_date (自定义 SQL 查询2)]</local-name>
-            <parent-name>[20180830_DATA]</parent-name>
-            <remote-alias>ann_date</remote-alias>
+            <remote-name>reservedPerShare</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[reservedPerShare]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>reservedPerShare</remote-alias>
             <ordinal>14</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <width>21845</width>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
-            <cast-to-local-type>true</cast-to-local-type>
-            <collation flag='0' name='LROOT' />
             <attributes>
-              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WLONGVARCHAR&quot;</attribute>
-              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>esp</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[esp]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>esp</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bvps</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bvps]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>bvps</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>undp</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[undp]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>undp</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>npr</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[npr]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>npr</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pb</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[pb]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>pb</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pe</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[pe]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>pe</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>perundp</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[perundp]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>perundp</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>profit</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[profit]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>profit</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>rev</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[rev]</local-name>
+            <parent-name>[20180301_DATA]</parent-name>
+            <remote-alias>rev</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_DOUBLE&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_DOUBLE&quot;</attribute>
             </attributes>
           </metadata-record>
         </metadata-records>
       </connection>
+      <aliases enabled='yes' />
       <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
         <calculation class='tableau' formula='1' />
       </column>
-      <layout dim-ordering='alphabetic' dim-percentage='0.485161' measure-ordering='alphabetic' measure-percentage='0.514839' show-structure='true' />
+      <column caption='股票编码' datatype='string' name='[code]' role='dimension' type='nominal' />
+      <column caption='股票名称' datatype='string' name='[name]' role='dimension' type='nominal' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.25' measure-ordering='alphabetic' measure-percentage='0.75' show-structure='true' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;China&quot;' />
       </semantic-values>
@@ -259,39 +392,45 @@
   </datasources>
   <worksheets>
     <worksheet name='工作表 2'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>中国国际金融股份有限公司</run>
+          </formatted-text>
+        </title>
+      </layout-options>
       <table>
         <view>
           <datasources>
             <datasource caption='自定义 SQL 查询+ (finance_db)' name='federated.04ei5vs18p65e716q3hfp19kqsbc' />
           </datasources>
           <datasource-dependencies datasource='federated.04ei5vs18p65e716q3hfp19kqsbc'>
-            <column datatype='integer' name='[counts]' role='measure' type='quantitative' />
-            <column datatype='string' name='[holdername]' role='dimension' type='nominal' />
-            <column-instance column='[holdername]' derivation='None' name='[none:holdername:nk]' pivot='key' type='nominal' />
-            <column-instance column='[counts]' derivation='Sum' name='[sum:counts:qk]' pivot='key' type='quantitative' />
+            <column datatype='real' name='[holders]' role='measure' type='quantitative' />
+            <column caption='股票名称' datatype='string' name='[name]' role='dimension' type='nominal' />
+            <column-instance column='[name]' derivation='None' name='[none:name:nk]' pivot='key' type='nominal' />
+            <column-instance column='[holders]' derivation='Sum' name='[sum:holders:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
-          <sort class='computed' column='[federated.04ei5vs18p65e716q3hfp19kqsbc].[none:holdername:nk]' direction='DESC' using='[federated.04ei5vs18p65e716q3hfp19kqsbc].[sum:counts:qk]' />
           <aggregation value='true' />
         </view>
         <style />
         <panes>
-          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
               <breakdown value='auto' />
             </view>
             <mark class='Automatic' />
           </pane>
         </panes>
-        <rows />
-        <cols>[federated.04ei5vs18p65e716q3hfp19kqsbc].[none:holdername:nk]</cols>
+        <rows>[federated.04ei5vs18p65e716q3hfp19kqsbc].[none:name:nk]</rows>
+        <cols>[federated.04ei5vs18p65e716q3hfp19kqsbc].[sum:holders:qk]</cols>
       </table>
     </worksheet>
   </worksheets>
-  <windows saved-dpi-scale-factor='1.25' source-height='30'>
+  <windows saved-dpi-scale-factor='1.25' source-height='37'>
     <window class='worksheet' maximized='true' name='工作表 2'>
       <cards>
         <edge name='left'>
-          <strip size='160'>
+          <strip size='200'>
             <card type='pages' />
             <card type='filters' />
             <card type='marks' />
@@ -304,7 +443,7 @@
           <strip size='2147483647'>
             <card type='rows' />
           </strip>
-          <strip size='31'>
+          <strip size='2147483647'>
             <card type='title' />
           </strip>
         </edge>
@@ -312,62 +451,208 @@
       <viewpoint>
         <highlight>
           <color-one-way>
+            <field>[federated.04ei5vs18p65e716q3hfp19kqsbc].[none:ann_date:nk]</field>
+            <field>[federated.04ei5vs18p65e716q3hfp19kqsbc].[none:code:nk]</field>
             <field>[federated.04ei5vs18p65e716q3hfp19kqsbc].[none:holdername:nk]</field>
+            <field>[federated.04ei5vs18p65e716q3hfp19kqsbc].[none:name:nk]</field>
           </color-one-way>
         </highlight>
       </viewpoint>
     </window>
   </windows>
   <thumbnails>
-    <thumbnail height='84' name='工作表 2' width='192'>
-      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
+    <thumbnail height='192' name='工作表 2' width='192'>
+      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
+      +/8Bn88ejnLK3WwAAAAASUVORK5CYII=
     </thumbnail>
   </thumbnails>
 </workbook>
