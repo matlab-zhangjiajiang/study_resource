@@ -11,33 +11,122 @@
       <connection class='federated'>
         <named-connections>
           <named-connection caption='120.132.116.172' name='mysql.1qfu00c0e4qdcv14tkw5y1lmu3sc'>
-            <connection class='mysql' dbname='' odbc-native-protocol='' one-time-sql='' port='3306' server='120.132.116.172' source-charset='' username='read_spider' />
+            <connection class='mysql' dbname='finance_db' odbc-native-protocol='' one-time-sql='' port='3306' server='120.132.116.172' source-charset='' username='read_spider' />
           </named-connection>
         </named-connections>
+        <relation connection='mysql.1qfu00c0e4qdcv14tkw5y1lmu3sc' name='当月集合竞价大于1000手综合排序' type='text'>SELECT&#13;&#10;&#9;*&#13;&#10;FROM&#13;&#10;&#9;(&#13;&#10;&#9;&#9;SELECT&#13;&#10;&#9;&#9;&#9;count(bid. CODE) AS counts,&#13;&#10;&#9;&#9;&#9;max(bid. NAME),&#13;&#10;&#9;&#9;&#9;max(bid.industry)&#13;&#10;&#9;&#9;FROM&#13;&#10;&#9;&#9;&#9;finance_system_stock_set_bid_data bid&#13;&#10;&#9;&#9;WHERE&#13;&#10;&#9;&#9;&#9;DATE_FORMAT(bid.createTime, &apos;%Y-%m&apos;) = DATE_FORMAT(CURDATE(), &apos;%Y-%m&apos;)&#13;&#10;&#9;&#9;GROUP BY&#13;&#10;&#9;&#9;&#9;CODE&#13;&#10;&#9;) DATAS&#13;&#10;ORDER BY&#13;&#10;&#9;DATAS.counts DESC</relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>counts</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[counts]</local-name>
+            <parent-name>[当月集合竞价大于1000手综合排序]</parent-name>
+            <remote-alias>counts</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_BIGINT&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_SBIGINT&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>max(bid. NAME)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[max(bid. NAME)]</local-name>
+            <parent-name>[当月集合竞价大于1000手综合排序]</parent-name>
+            <remote-alias>max(bid. NAME)</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>50</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>max(bid.industry)</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[max(bid.industry)]</local-name>
+            <parent-name>[当月集合竞价大于1000手综合排序]</parent-name>
+            <remote-alias>max(bid.industry)</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>50</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LROOT' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
+              <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
       </connection>
+      <aliases enabled='yes' />
       <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
         <calculation class='tableau' formula='1' />
       </column>
-      <layout dim-ordering='alphabetic' dim-percentage='0.5' measure-ordering='alphabetic' measure-percentage='0.5' show-structure='true' />
+      <column caption='出现次数' datatype='integer' name='[counts]' role='measure' type='quantitative' />
+      <column caption='股票名称' datatype='string' name='[max(bid. NAME)]' role='dimension' type='nominal' />
+      <column caption='行业' datatype='string' name='[max(bid.industry)]' role='dimension' type='nominal' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.505495' measure-ordering='alphabetic' measure-percentage='0.494505' show-structure='true' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;China&quot;' />
       </semantic-values>
     </datasource>
   </datasources>
   <worksheets>
-    <worksheet name='工作表 1'>
+    <worksheet name='当月集合竞价大于1000手'>
       <table>
         <view>
-          <datasources />
+          <datasources>
+            <datasource caption='120.132.116.172' name='federated.1ktzogj0c3dlzi14c6sot1520oca' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1ktzogj0c3dlzi14c6sot1520oca'>
+            <column caption='出现次数' datatype='integer' name='[counts]' role='measure' type='quantitative' />
+            <column caption='股票名称' datatype='string' name='[max(bid. NAME)]' role='dimension' type='nominal' />
+            <column-instance column='[max(bid. NAME)]' derivation='None' name='[none:max(bid. NAME):nk]' pivot='key' type='nominal' />
+            <column-instance column='[counts]' derivation='Sum' name='[sum:counts:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <sort class='computed' column='[federated.1ktzogj0c3dlzi14c6sot1520oca].[none:max(bid. NAME):nk]' direction='DESC' using='[federated.1ktzogj0c3dlzi14c6sot1520oca].[sum:counts:qk]' />
           <aggregation value='true' />
         </view>
-        <style />
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='size-bar' field='[federated.1ktzogj0c3dlzi14c6sot1520oca].[sum:counts:qk]' field-type='quantitative' max-size='1' min-size='0.005' type='centersize' />
+          </style-rule>
+        </style>
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
-              <breakdown value='auto' />
+              <breakdown value='on' />
             </view>
             <mark class='Automatic' />
+            <encodings>
+              <size column='[federated.1ktzogj0c3dlzi14c6sot1520oca].[sum:counts:qk]' />
+              <color column='[federated.1ktzogj0c3dlzi14c6sot1520oca].[sum:counts:qk]' />
+              <text column='[federated.1ktzogj0c3dlzi14c6sot1520oca].[none:max(bid. NAME):nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-line-first' value='true' />
+                <format attr='mark-labels-line-last' value='true' />
+                <format attr='mark-labels-range-min' value='true' />
+                <format attr='mark-labels-range-max' value='true' />
+                <format attr='mark-labels-mode' value='all' />
+                <format attr='mark-labels-range-scope' value='pane' />
+                <format attr='mark-labels-range-field' value='' />
+              </style-rule>
+            </style>
           </pane>
         </panes>
         <rows />
@@ -46,10 +135,10 @@
     </worksheet>
   </worksheets>
   <windows saved-dpi-scale-factor='1.25' source-height='37'>
-    <window class='worksheet' maximized='true' name='工作表 1'>
+    <window class='worksheet' maximized='true' name='当月集合竞价大于1000手'>
       <cards>
         <edge name='left'>
-          <strip size='250'>
+          <strip size='312'>
             <card type='pages' />
             <card type='filters' />
             <card type='marks' />
@@ -67,22 +156,104 @@
           </strip>
         </edge>
       </cards>
+      <viewpoint>
+        <zoom type='fit-width' />
+        <selection-collection>
+          <tuple-selection>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields />
+                  <y-fields />
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.1ktzogj0c3dlzi14c6sot1520oca].[none:max(bid. NAME):nk]</field>
+                  <field>[federated.1ktzogj0c3dlzi14c6sot1520oca].[sum:counts:qk]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>&quot;云煤能源&quot;</value>
+                <value>1</value>
+              </tuple>
+            </tuple-reference>
+          </tuple-selection>
+        </selection-collection>
+        <highlight>
+          <color-one-way>
+            <field>[federated.1ktzogj0c3dlzi14c6sot1520oca].[none:max(bid. NAME):nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
     </window>
   </windows>
   <thumbnails>
-    <thumbnail height='192' name='工作表 1' width='192'>
+    <thumbnail height='192' name='当月集合竞价大于1000手' width='192'>
       iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAACFUlEQVR4nO3TMQEAIAzAMMC/5yFjRxMFfXpnZg5Eve0A2GQA0gxAmgFIMwBpBiDNAKQZ
-      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
-      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQD
-      kGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBp
-      BiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA
-      0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDN
-      AKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxA
-      mgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZ
-      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
-      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKR9Y+0F
-      fBUOM1sAAAAASUVORK5CYII=
+      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
+      gg==
     </thumbnail>
   </thumbnails>
 </workbook>
